@@ -8,7 +8,7 @@ var Handlebars = require('handlebars');
 var sass = Promise.promisifyAll(require('node-sass'));
 
 module.exports = {
-  compile: function compile(options, context, compileCallback){
+  compile: function compile(options, context, compileCallback) {
     var defaultOpts = {
       size: {
         height: 1,
@@ -17,19 +17,19 @@ module.exports = {
     };
     var templatePath = path.join(__dirname, 'content/layout.handlebars');
     var scssPath = path.join(__dirname, 'content/site.scss');
-    function run(callback){
+    function run(callback) {
       var renderPromises = context.getAllComponents()
-        .filter(function(component){
+        .filter(function(component) {
           return component.$controllerName.startsWith('dashka-htmlwidget');
         })
-        .map(function(component){
+        .map(function(component) {
           var widgetOpts = options.widgets[component.$name] || {};
           widgetOpts = _.extend(defaultOpts, widgetOpts);
           var widget = {
             title: component.title
           };
 
-          if(typeof widgetOpts.size === 'string'){
+          if(typeof widgetOpts.size === 'string') {
             var sizeSplit = widgetOpts.size.split('x');
             widget.size = {
               height: +sizeSplit[0],
@@ -40,7 +40,7 @@ module.exports = {
           }
 
           return Promise.promisify(component.render).bind(component)()
-            .then(function(html){
+            .then(function(html) {
               return {
                 title: component.title,
                 html: html
@@ -49,12 +49,12 @@ module.exports = {
         });
 
       Promise.all(renderPromises)
-        .then(function(widgets){
+        .then(function(widgets) {
           var data = {
             widgets: widgets
           };
           fs.read(templatePath)
-            .then(function(templateText){
+            .then(function(templateText) {
               var template = Handlebars.compile(templateText);
               var renderedPage = template(data);
               var indexPath = path.join(context.config.renderFolder, 'index.html');
@@ -67,7 +67,7 @@ module.exports = {
               var cssPath = path.join(context.config.renderFolder, 'site.css');
               return fs.writeFile(cssPath, renderedScss);
             })
-            .then(function(){
+            .then(function() {
               callback();
             });
         });
