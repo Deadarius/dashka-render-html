@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="site.css">
+  </head>
+  <body>
+    <div>
+      {{#each widgets}}
+        <div class="widget width-{{this.size.width}} height-{{this.size.height}}">
+          <div class="widget-title">
+            <h5>{{title}}</h5>
+          </div>
+          <div class="widget-content">
+            {{{html}}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </body>
+</html>
