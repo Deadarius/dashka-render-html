@@ -57,14 +57,14 @@ module.exports = {
             .then(function(templateText) {
               var template = Handlebars.compile(templateText);
               var renderedPage = template(data);
-              var indexPath = path.join(context.config.renderFolder, 'index.html');
+              var indexPath = path.join(options.outputFolder, 'index.html');
               return fs.writeFile(indexPath, renderedPage);
             })
             .then(function() {
               return sass.render({ file: scssPath });
             })
             .then(function(renderedScss) {
-              var cssPath = path.join(context.config.renderFolder, 'site.css');
+              var cssPath = path.join(options.outputFolder, 'site.css');
               return fs.writeFile(cssPath, renderedScss);
             })
             .then(function() {
