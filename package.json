@@ -4,7 +4,8 @@
   "description": "Html render for Dashka",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "./node_modules/.bin/eslint ."
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,8 @@
     "handlebars": "^3.0.3",
     "lodash": "^3.9.3",
     "node-sass": "^3.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^0.22.1"
   }
 }
