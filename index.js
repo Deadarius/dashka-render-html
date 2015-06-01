@@ -10,7 +10,10 @@ var sass = Promise.promisifyAll(require('node-sass'));
 module.exports = {
   compile: function compile(options, context, compileCallback){
     var defaultOpts = {
-      size: '1x2'
+      size: {
+        height: 1,
+        width: 2
+      }
     };
     var templatePath = path.join(__dirname, 'content/layout.handlebars');
     var scssPath = path.join(__dirname, 'content/site.scss');
