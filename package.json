@@ -1,6 +1,6 @@
 {
   "name": "dashka-render-html",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Html render for Dashka",
   "main": "index.js",
   "scripts": {
